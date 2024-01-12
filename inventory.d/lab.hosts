@@ -1,0 +1,11 @@
+[LAB]
+ES-MIGRATION-STORAGE ansible_host=10.10.46.20
+
+[LAB:vars]
+
+http_proxy=http://10.10.16.199:3128
+https_proxy=http://10.10.16.199:3128
+
+
+python_version=3.9.6
+pip_version=3.9

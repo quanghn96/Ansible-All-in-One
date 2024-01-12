@@ -1,0 +1,12 @@
+---
+- name: Step create group cần gói libuser (ubuntu 22.04)
+  apt:
+    name: libuser
+    state: present
+
+- name: Install podman 
+  apt:
+    name: podman
+    state: present
+    update_cache: yes
+

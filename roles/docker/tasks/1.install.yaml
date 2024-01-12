@@ -1,0 +1,52 @@
+---
+- name: Install required system packages
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools', 'gnupg2', 'pass']
+
+- name: Add Docker GPG keyring
+  shell:
+    "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg --yes && chmod a+r /etc/apt/keyrings/docker.gpg"
+
+- name: Add Docker Repository
+  shell: 
+    'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+
+- name: Update apt and install docker-ce
+  apt: update_cache=yes name=docker-ce state=latest
+
+- name: Update apt and install docker-compose
+  apt: update_cache=yes name=docker-compose state=latest
+
+- name: Update apt and install python3-pip
+  apt: update_cache=yes name=python3-pip state=latest
+
+- name: Install python lib cho docker/compose
+  pip:
+    name:
+      - docker
+      - docker-compose
+
+- name: Create Folder proxy config for Docker service
+  file:
+      path: /etc/systemd/system/docker.service.d
+      state: directory
+      mode: '0755'
+
+- name: Create File proxy config for Docker service
+  file:
+      path: /etc/systemd/system/docker.service.d/http-proxy.conf
+      state: touch
+
+- name: Create proxy config for Docker service
+  blockinfile:
+    path: /etc/systemd/system/docker.service.d/http-proxy.conf
+    marker: ''
+    block: |
+        [Service]
+        Environment="http_proxy={{http_proxy}}" "https_proxy={{http_proxy}}" "no_proxy=localhost"
+
+- name: daemon-reload and restart docker
+  systemd:
+    state: restarted
+    daemon-reload: yes
+    name: docker

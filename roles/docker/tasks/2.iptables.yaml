@@ -1,0 +1,6 @@
+---
+- name: install_iptables_persistent
+  apt: pkg=iptables-persistent state=present
+
+- name: Save iptables with basic docker rule
+  command: netfilter-persistent save

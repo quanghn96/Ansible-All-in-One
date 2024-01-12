@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  pre_tasks:
+    - debug:  msg="You are acting at {{ inventory_hostname }} {{ansible_host}}"
+      tags: always
+
+    - name: Exterminate mankind
+      pause: prompt='Please confirm you want to exterminate mankind! Press return to continue. Press Ctrl+c and then "a" to abort'
+      no_log: true
+      tags: always
+
+    - name: Gathering facts
+      setup:
+      tags: always
+
+  roles:
+    - role: podman
+      tags: podman
+
+  environment:
+    http_proxy: '{{http_proxy}}'
+    https_proxy: '{{https_proxy}}'

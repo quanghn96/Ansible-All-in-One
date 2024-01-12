@@ -1,0 +1,7 @@
+---
+- name: Configuration for Docker daemon
+  copy:
+    content: '{"log-opts": {"max-size": "10m","max-file":"5"}}'
+    dest: /etc/docker/daemon.json
+    mode: 0644
+  notify: restart docker

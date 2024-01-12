@@ -1,0 +1,15 @@
+---
+- import_tasks: 1.install.yaml
+  tags:
+    - docker
+    - docker:install
+
+- import_tasks: 2.iptables.yaml
+  tags:
+    - docker
+    - docker:iptables
+
+- import_tasks: 3.daemon.yaml
+  tags:
+    - docker
+    - docker:daemon
