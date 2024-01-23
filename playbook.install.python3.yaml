@@ -16,8 +16,9 @@
       tags: always
 
   roles:
-    - role: python
-      tags: python
+    - role: python3
+      tags:
+        - python3
 
   environment:
     http_proxy: '{{http_proxy}}'

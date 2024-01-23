@@ -18,12 +18,19 @@
       - zlib1g-dev
       - liberasurecode-dev
     state: present
+    
+  tags:
+    - python
+    - pip
 
 ## check if python_version exists
 
 - name: install python{{ pip_version }}
   shell: cd /opt  && wget https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz  && tar xzf Python-{{ python_version }}.tgz  && cd Python-{{ python_version }}  && ./configure --enable-optimizations  && make altinstall
-
+  tags:
+    - python
 
 - name: install pip{{ pip_version }}
-  shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.9 get-pip.py && rm get-pip.py
+  shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python{{ python_version }} get-pip.py && rm get-pip.py
+  tags:
+    - pip
