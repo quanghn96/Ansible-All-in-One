@@ -1,0 +1,30 @@
+- name: User Create or update the default password
+  user:
+      name: '{{ item.username }}'
+      shell: '/bin/bash'
+      createhome: yes
+      comment: 'created with ansible'
+      groups: '{{ item.group }}'
+      password: '{{ item.password }}'
+  with_items: '{{special_users}}'
+
+- name: Setup authorized key upload for per special users
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ item.pub_key }}"
+    exclusive: yes
+  with_items: '{{special_users}}'
+
+## disable password root_permission_user
+- name: disable password
+  command: passwd -d {{ root_permission_user }}
+
+- name: Deploy private key for "{{ root_permission_user }}"
+  copy:
+    src: "{{ item }}"
+    dest: /home/{{ root_permission_user }}/.ssh/id_rsa
+    owner: "{{ root_permission_user }}"
+    group: "{{ root_permission_user }}"
+    mode: 0600
+  with_fileglob:
+    - "private_key"

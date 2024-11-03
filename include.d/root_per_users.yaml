@@ -1,0 +1,8 @@
+
+special_users:
+
+  - username: "{{ root_permission_user }}"
+    password: '!'
+    group: sudo 
+    pub_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDF0Y3bSl+Y8Ed3I0Fj8t2N69gbBrwtXqoh+/1p3laD7ISkFx1lZS4jkzdxONhPBlCKlU0DXoJz/OwkgpUkP0eaH/HO8ZvtQqVKc7BovxQDVSBX3BWw5W16mxl1+UNu1ZD/fqSScyCuchFISQsLT5qNVwPZgI9MyCHTGQxAkUS6dv6QlVfcaKM/sEQviybSTytNQTF9ACSnZ8jtsDDVu3+5y7ZJI0OVydIx0P6zPn6IGoiWPoWxJsi2Z947DKzLCBzRYoUTpqfxHacJlYdT5em4Ju6sibpBOVZudseKYx3SsO4MC2vbTVQIHTK0C9MyfoAkwuKv6Fx2FrCTYCR+WC+set6HzJk/hAW/G5EnGntewmEX3dAnR/IHe9784M5eviZ6AO6X0OEN8nWJoLTX/uNcIcalAERJplTrYfw68SXmysmRwbNnEnAwg9JvgD6hohUjId9OQIWvcq3JjrqD1xobTR8+xOdKXKMFkYURYQS+HRap98GhH3tmC0mnSWug+BCxtCl7oXwEyAb5c3dLjM1e9cyJQmah5l3nbyBh5/KCGzGU5PVPlup/AGTkr1wcU4F9L68MWPI7Mc9ePMTLmf6RweRGpOifkTG43mDcW0ouaoG4G2DTEOv64oUF/7ORJz8kkRidwQvgSOivd/YgefSRLzfWqf+riQNIhO5MmwQuxQ=='
+    key: yes

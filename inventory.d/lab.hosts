@@ -1,11 +1,14 @@
 [LAB]
-ES-MIGRATION-STORAGE ansible_host=10.10.46.20
+lab-4 ansible_host=172.25.155.185
+lab-5 ansible_host=172.25.155.243
+lab-6 ansible_host=172.25.155.153
 
 [LAB:vars]
 
-http_proxy=http://10.10.16.199:3128
-https_proxy=http://10.10.16.199:3128
+http_proxy=
+https_proxy=
 
+root_permission_user=cephadmin
 
 python_version=3.9.6
 pip_version=3.9
